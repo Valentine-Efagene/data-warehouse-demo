@@ -127,6 +127,32 @@ class MysqlHelper:
         """
         Convert the rows result of a query to a pandas table
 
+        Usage:
+
+        from MysqlHelper import MysqlHelper  
+
+        HOST_NAME = 'localhost'  
+
+        USERNAME = 'root'  
+
+        PASSWORD = ''  
+
+        DB_NAME = 'db_name'  
+
+
+        mysqlHelper = MysqlHelper(host=HOST_NAME, user=USERNAME, password=PASSWORD, database=DB_NAME) 
+
+        results = mysqlHelper.query('SELECT first_name, last_name, email FROM users;')  
+
+        mysqlHelper.close()  
+
+        df = mysqlHelper.rowsToPDTable(results, ['First Name', 'Last Name', 'Email'])  
+
+        del mysqlHelper  
+
+        df  
+
+
         Args:
             rows {List}: Returned MySQL rows
             columns {List}: List of the column names for the pandas DataFrame
