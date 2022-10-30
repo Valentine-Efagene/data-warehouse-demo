@@ -123,6 +123,25 @@ class MysqlHelper:
         except Error as err:
             print(f"Error: '{err}'")
 
+    def mutateMany(self, queryString: str, values: List = None):
+        """
+        Execute several similar database mutations
+
+        Args:
+            queryString {str}: Database query as a string
+            values {?Tuple}: Tuple containing values to insert into a query at the placeholders. Defaults to None.
+        """
+        try:
+            if (values):
+                self.cursor.executemany(queryString, values)
+            else:
+                self.cursor.executemany(queryString)
+
+            self.connection.commit()
+            print("Mutation successful")
+        except Error as err:
+            print(f"Error: '{err}'")
+
     def rowsToPDTable(self, rows: List, columns: List):
         """
         Convert the rows result of a query to a pandas table
